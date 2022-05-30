@@ -1,4 +1,4 @@
-# 50_shades_of_green
+# 50 Shades of Green
 transfer learning demo
 
 ![Leaves](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallup.net%2Fwp-content%2Fuploads%2F2019%2F09%2F709922-ruspberry-leaves-plants-green-spring-garden.jpg&f=1&nofb=1 "")
