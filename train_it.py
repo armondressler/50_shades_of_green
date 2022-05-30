@@ -1,16 +1,14 @@
 import pathlib
+
 import matplotlib.pyplot as plt
 import numpy as np
 import PIL
 import tensorflow as tf
-
-import tensorflow as tf
 from tensorflow import keras
+from tensorflow.keras import layers
+from tensorflow.keras.layers import Dense, Flatten
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.optimizers import Adam
-from tensorflow.keras import layers
-from tensorflow.keras.layers import Dense,Flatten
-
 
 _data_dir = "./data/training"
 data_dir = pathlib.Path(_data_dir)
@@ -51,14 +49,6 @@ AUTOTUNE = tf.data.AUTOTUNE
 train_ds = train_ds.cache().shuffle(1000).prefetch(buffer_size=AUTOTUNE)
 val_ds = val_ds.cache().prefetch(buffer_size=AUTOTUNE)
 
-data_augmentation = keras.Sequential(
-    [
-        layers.RandomFlip("horizontal"),
-        layers.RandomRotation(0.1),
-    ]
-)
-
-
 resnet_model = Sequential()
 
 pretrained_model= tf.keras.applications.ResNet50(include_top=False,
@@ -66,6 +56,7 @@ pretrained_model= tf.keras.applications.ResNet50(include_top=False,
                    pooling='avg',
                    classes=len(class_names),
                    weights='imagenet')
+
 for layer in pretrained_model.layers:
         layer.trainable=False
 
@@ -79,3 +70,4 @@ resnet_model.compile(optimizer=Adam(learning_rate=0.001),loss='sparse_categorica
 history = resnet_model.fit(train_ds, validation_data=val_ds, epochs=10)
 
 resnet_model.save(f"{model_dir}")
+print(f"Model unter {model_dir} gespeichert.")

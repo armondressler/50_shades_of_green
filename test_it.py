@@ -37,13 +37,14 @@ for test_instance in test_data:
     test_instance.predicted_class = class_names[np.argmax(predictions)]
     print(f"Predicted class: {test_instance.predicted_class}, actual class: {test_instance.actual_class} ({'SUCCESS' if test_instance.predicted_class == test_instance.actual_class else 'FAILURE'})" )
 
-
+success_instances = [test_instance for test_instance in test_data if test_instance.prediction_success()]
+failed_instances = [test_instance for test_instance in test_data if not test_instance.prediction_success()]
+print(f"Accuracy: {len(success_instances)/len(test_data)*100}%")
 
 plt.figure(figsize=(16, 16))
-success_instances = [test_instance for test_instance in test_data if not test_instance.prediction_success()]
-for index, test_instance in enumerate(success_instances):
-    ax = plt.subplot(len(success_instances), 1, index + 1)
+for index, test_instance in enumerate(failed_instances):
+    ax = plt.subplot(len(failed_instances), 1, index + 1)
     plt.imshow(test_instance.image_array.numpy().astype("uint8").squeeze())
     plt.title(test_instance.predicted_class)
     plt.axis("off")
-plt.savefig(f"{data_dir}/result.png")
+plt.savefig(f"{data_dir}/failed_predictions.png")
