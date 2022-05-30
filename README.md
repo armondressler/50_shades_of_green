@@ -9,6 +9,6 @@ train_it.py sets up the network and persists it locally.
 
 test_it.py tries to predict the classes of the test data provided.
 
+The testing dataset needs to be stored in ./data/testing and the training dataset in ./data/training .
 Testing dataset available at "https://drive.google.com/drive/folders/1fwr087g0hMwn3PW5SPqDIlQaIJIqWYBR?usp=sharing"
-
 Training dataset available at "https://drive.google.com/drive/folders/1u53Yk-EAtxR5M8sQst4-g3Umi88zFnWt?usp=sharing"
